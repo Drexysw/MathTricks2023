@@ -1,4 +1,5 @@
-﻿using MathTricks.GameObjects;
+﻿using MathTricks.Core;
+using MathTricks.GameObjects;
 
 namespace MathTricks
 {
@@ -6,7 +7,8 @@ namespace MathTricks
     {
         static void Main(string[] args)
         {
-            Board board = new Board(4, 4);
+            Board board = new Board(4,6);
+            Engine engine = new Engine(board);
         }
     }
 }

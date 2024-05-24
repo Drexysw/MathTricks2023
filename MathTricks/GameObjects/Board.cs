@@ -11,7 +11,7 @@
             random = new Random();
             IsParametersCorrect(rows, cols);
             InitializeBoard();
-            PrintBoarder(); 
+            PrintBoarder();
         }
 
         private static void IsParametersCorrect(int rows, int cols)
@@ -26,32 +26,28 @@
 
         public int Cols { get; set; }
 
-        private List<char> ArithmeticOperations { get; set; } = ['-', '*', '/'];
+        private List<char> ArithmeticOperations { get; set; } = ['-', '*', '/', '+'];
 
         private void InitializeBoard()
         {
             this.board = new string[Rows, Cols];
-            int count = 0;
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Cols; j++)
                 {
-                    if (Rows == 0 && Cols == 0 || Rows == Rows - 1 && Cols == Cols - 1)
+                    string randomOperation = ArithmeticOperations[random.Next(0, 4)].ToString() == "+" ? string.Empty : ArithmeticOperations[random.Next(0, 4)].ToString();
+                    string randomNumber = random.Next(0, 30).ToString();
+                    if (i == 0 && j == 0 || i == Rows - 1 && j == Cols - 1)
                     {
                         this.board[i, j] = "0";
                         continue;
                     }
-
-                    if (count % 3 == 0)
+                    if (randomNumber == "0" && randomOperation != "/")
                     {
-                        this.board[i, j] = $"{ArithmeticOperations[random.Next(0, 3)]}{random.Next(1, 30)}";
-                        count++;
+                        this.board[i, j] = $"{randomOperation}{randomNumber}";
+                        continue;
                     }
-                    else
-                    {
-                        this.board[i, j] = random.Next(1, 30).ToString();
-                        count++;
-                    }
+                    this.board[i, j] = $"{randomOperation}{randomNumber}";
                 }
             }
         }
