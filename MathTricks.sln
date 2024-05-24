@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathTricks", "MathTricks\MathTricks.csproj", "{753C50AC-2EF9-4DAB-AF3A-7A2E36A0F5CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{753C50AC-2EF9-4DAB-AF3A-7A2E36A0F5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{753C50AC-2EF9-4DAB-AF3A-7A2E36A0F5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{753C50AC-2EF9-4DAB-AF3A-7A2E36A0F5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{753C50AC-2EF9-4DAB-AF3A-7A2E36A0F5CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB5528BA-8DD4-4CB0-9CBC-4A6272CD9AE6}
+	EndGlobalSection
+EndGlobal
