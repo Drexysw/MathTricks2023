@@ -2,6 +2,8 @@
 {
     public class Board
     {
+        private int rows;
+        private int cols;
         private string[,] board;
         private Random random;
         public Board(int rows, int cols)
@@ -9,60 +11,76 @@
             this.Rows = rows;
             this.Cols = cols;
             random = new Random();
-            IsParametersCorrect(rows, cols);
+            PlayersUsedArithmeticOperations = new List<string>();
             InitializeBoard();
             PrintBoarder();
         }
-
-        private static void IsParametersCorrect(int rows, int cols)
+        public int Rows
         {
-            if (rows < 4 || cols < 4)
+            get => rows;
+            set
             {
-                throw new ArgumentException("Rows and columns must be at least 4.");
+                if (value < 4)
+                {
+                    throw new ArgumentException("Rows must be at least 4.");
+                }
+                rows = value;
             }
         }
 
-        public int Rows { get; set; }
+        public int Cols
+        {
+            get => cols;
+            set
+            {
+                if (value < 4)
+                {
+                    throw new ArgumentException("Columns must be at least 4.");
+                }
+                cols = value;
+            }
+        }
 
-        public int Cols { get; set; }
-
-        private List<char> ArithmeticOperations { get; set; } = ['-', '*', '/', '+'];
-
+        private List<char> ArithmeticOperations => ['-', '*', '/', '+'];
+        public List<string> PlayersUsedArithmeticOperations { get; set; }
         private void InitializeBoard()
         {
             this.board = new string[Rows, Cols];
-            for (int i = 0; i < Rows; i++)
+            for (int row = 0; row < Rows; row++)
             {
-                for (int j = 0; j < Cols; j++)
+                for (int col = 0; col < Cols; col++)
                 {
-                    string randomOperation = ArithmeticOperations[random.Next(0, 4)].ToString() == "+" ? string.Empty : ArithmeticOperations[random.Next(0, 4)].ToString();
+                    var operation = ArithmeticOperations[random.Next(0, 4)].ToString();
+                    string symbolOfOperation = operation == "+" ? string.Empty : operation;
                     string randomNumber = random.Next(0, 30).ToString();
-                    if (i == 0 && j == 0 || i == Rows - 1 && j == Cols - 1)
+                    if (row == 0 && col == 0 || row == Rows - 1 && col == Cols - 1)
                     {
-                        this.board[i, j] = "0";
+                        this.board[row, col] = "0";
                         continue;
                     }
-                    if (randomNumber == "0" && randomOperation != "/")
+                    if (randomNumber == "0" && symbolOfOperation != "/")
                     {
-                        this.board[i, j] = $"{randomOperation}{randomNumber}";
+                        this.board[row, col] = $"{symbolOfOperation}{randomNumber}";
                         continue;
                     }
-                    this.board[i, j] = $"{randomOperation}{randomNumber}";
+                    this.board[row, col] = $"{symbolOfOperation}{randomNumber}";
                 }
             }
         }
 
         private void PrintBoarder()
         {
-            for (int i = 0; i < Rows; i++)
+            for (int row = 0; row < Rows; row++)
             {
-                for (int j = 0; j < Cols; j++)
+                for (int col = 0; col < Cols; col++)
                 {
-                    Console.Write(board[i, j] + " ");
+                    Console.Write(board[row, col] + " ");
                 }
                 Console.WriteLine();
             }
         }
+        public bool HasPlayerHitTheBoard(int row, int col) =>  row < 0 || row >= Rows || col < 0 || col >= Cols;
+        public string GetBoardValue(int row, int col) => board[row, col];
     }
 }
 
