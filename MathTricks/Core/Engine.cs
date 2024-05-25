@@ -5,9 +5,9 @@ namespace MathTricks.Core
 {
     public class Engine
     {
-        private Player firstPlayer;
-        private Player secondPlayer;
-        public Engine(Player firstPlayer, Player secondPlayer)
+        private FirstPlayer firstPlayer;
+        private SecondPlayer secondPlayer;
+        public Engine(FirstPlayer firstPlayer, SecondPlayer secondPlayer)
         {
             this.firstPlayer = firstPlayer;
             this.secondPlayer = secondPlayer;
@@ -15,10 +15,31 @@ namespace MathTricks.Core
         public void Run()
         {
             int count = 0;
+            string command = string.Empty;
+            int[] cordinates = new int[2];
+            bool isMoving = true;
             while (true)
             {
-                string command = Console.ReadLine();
-                int[] direction = GetDirection(command);
+                bool IsFirstPlayer = count % 2 == 0;
+                Console.WriteLine(IsFirstPlayer ? "Its player1 turn" : "Its player2 turn");
+                command = Console.ReadLine();
+                if (IsFirstPlayer)
+                {
+                    cordinates = GetNextPosition(firstPlayer.NextRowPos, firstPlayer.NextColPos, GetDirection(command));
+                    isMoving = firstPlayer.CanPlayerMove(cordinates[0], cordinates[1]);
+                }
+                else
+                {
+                    cordinates = GetNextPosition(secondPlayer.NextRowPos, secondPlayer.NextColPos, GetDirection(command));
+                    isMoving = secondPlayer.CanPlayerMove(cordinates[0], cordinates[1]);
+                }
+                count++;
+                if (!isMoving)
+                {
+                    Console.WriteLine(GetWinner());
+                    break;
+                }
+
             }
         }
 
@@ -27,22 +48,46 @@ namespace MathTricks.Core
             switch (command)
             {
                 case "up":
-                    return new int[] { -1, 0 };
+                    return [-1, 0];
                 case "down":
-                    return new int[] { 1, 0 };
+                    return [1, 0];
                 case "left":
-                    return new int[] { 0, -1 };
+                    return [0, -1];
                 case "right":
-                    return new int[] { 0, 1 };
+                    return [0, 1];
                 case "downleft":
-                    return new int[] { 1, -1 };
+                    return [1, -1];
                 case "downright":
-                    return new int[] { 1, 1 };
+                    return [1, 1];
                 case "upleft":
-                    return new int[] { -1, -1 };
+                    return [-1, -1];
                 case "upright":
-                    return new int[] { -1, 1 };
+                    return [-1, 1];
+            }
+            return [0, 0];
+        }
+        private int[] GetNextPosition(int row, int col, int[] direction)
+        {
+            return [row + direction[0], col + direction[1]];
+        }
+
+        private string GetWinner()
+        {
+            int firstPlayerPoints = firstPlayer.PlayerPoints;
+            int secondPlayerPoints = secondPlayer.PlayerPoints;
+            if (firstPlayerPoints > secondPlayerPoints)
+            {
+                return $"Player 1 won the game: {firstPlayerPoints} (player 1) vs {secondPlayerPoints} (player 2)";
+            }
+            else if (firstPlayerPoints < secondPlayerPoints)
+            {
+                return $"Player 2 won the game: {firstPlayerPoints} (player 1) vs {secondPlayerPoints} (player 2)";
+            }
+            else
+            {
+                return $"Draw: {firstPlayerPoints} (player 1) vs {secondPlayerPoints} (player 2)";
             }
         }
     }
 }
+

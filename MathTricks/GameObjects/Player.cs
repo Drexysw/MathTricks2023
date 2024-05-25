@@ -1,21 +1,17 @@
 ﻿namespace MathTricks.GameObjects
 {
-    public class Player
+    public class Player : Poll
     {
         private Board board;
         public Player(Board board)
         {
             this.board = board;
-            this.NextRowPos = 0;
-            this.NextColPos = 0;
             this.PlayerPoints = 0;
         }
 
         public int PlayerPoints { get; set; }
-        private int NextRowPos { get; set; }
-        private int NextColPos { get; set; }
 
-        public bool CanPlayerMove(int row, int col)
+        public virtual bool CanPlayerMove(int row, int col)
         {
             if (this.board.HasPlayerHitTheBoard(row, col))
             {

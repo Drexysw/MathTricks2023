@@ -79,8 +79,9 @@
                 Console.WriteLine();
             }
         }
-        public bool HasPlayerHitTheBoard(int row, int col) =>  row < 0 || row >= Rows || col < 0 || col >= Cols;
+        public bool HasPlayerHitTheBoard(int row, int col) => row < 0 || row >= Rows || col < 0 || col >= Cols;
         public string GetBoardValue(int row, int col) => board[row, col];
+        public int[] GetLastPosition() => [Rows - 1, Cols - 1];
     }
 }
 
