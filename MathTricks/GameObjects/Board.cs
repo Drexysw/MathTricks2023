@@ -6,11 +6,11 @@
         private int cols;
         private string[,] board;
         private Random random;
-        public Board(int rows, int cols)
+        public Board()
         {
-            this.Rows = rows;
-            this.Cols = cols;
             random = new Random();
+            this.Rows = random.Next(4,10);
+            this.Cols = random.Next(4,10);
             PlayersUsedArithmeticOperations = new List<string>();
             InitializeBoard();
             PrintBoarder();

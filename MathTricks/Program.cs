@@ -8,7 +8,7 @@ namespace MathTricks
     {
         static void Main(string[] args)
         {
-            var board = new Board(5, 6);
+            var board = new Board();
             var firstPlayer = new FirstPlayer(board);
             var secondPlayer = new SecondPlayer(board);
             var engine = new Engine(firstPlayer, secondPlayer);
