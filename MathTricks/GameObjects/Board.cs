@@ -15,7 +15,7 @@
             InitializeBoard();
             PrintBoarder();
         }
-        public int Rows
+        private int Rows
         {
             get => rows;
             set
@@ -28,7 +28,7 @@
             }
         }
 
-        public int Cols
+        private int Cols
         {
             get => cols;
             set

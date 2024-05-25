@@ -2,7 +2,7 @@
 {
     public abstract class Poll
     {
-        public int NextRowPos { get; set; }
-        public int NextColPos { get; set; }
+        protected int NextRowPos { get; set; }
+        protected int NextColPos { get; set; }
     }
 }

@@ -1,31 +1,21 @@
-﻿using System.Linq;
-
-namespace MathTricks.GameObjects
+﻿namespace MathTricks.GameObjects
 {
-    public class Player : Poll
+    public class Player(Board board) : Poll
     {
-        private Board board;
-        public Player(Board board)
+        private int playerPoints;
+        public  bool CanPlayerMove(int row, int col)
         {
-            this.board = board;
-            this.PlayerPoints = 0;
-        }
-
-        public int PlayerPoints { get; set; }
-
-        public virtual bool CanPlayerMove(int row, int col)
-        {
-            if (this.board.HasPlayerHitTheBoard(row, col))
+            if (board.HasPlayerHitTheBoard(row, col))
             {
                 return false;
             }
             GetNextPosition(row, col);
             string boardValue = board.GetBoardValue(NextRowPos, NextColPos);
-            if (this.board.PlayersUsedArithmeticOperations.Contains(boardValue))
+            if (board.PlayersUsedArithmeticOperations.Contains(boardValue))
             {
                 return false;
             }
-            this.board.PlayersUsedArithmeticOperations.Add(boardValue);
+            board.PlayersUsedArithmeticOperations.Add(boardValue);
             IncreasePlayerPoints(boardValue);
             return true;
         }
@@ -34,26 +24,26 @@ namespace MathTricks.GameObjects
         {
             if (arithmeticOperation == "0")
             {
-                PlayerPoints = 0;
+                playerPoints = 0;
                 return;
             }
             string operation = arithmeticOperation.First().ToString();
             if (!board.ArithmeticOperations.Contains(char.Parse(operation)))
             {
-                PlayerPoints += int.Parse(arithmeticOperation);
+                playerPoints += int.Parse(arithmeticOperation);
                 return;
             }
             string number = arithmeticOperation.Remove(0, 1);
             switch (operation)
             {
                 case "-":
-                    PlayerPoints -= int.Parse(number);
+                    playerPoints -= int.Parse(number);
                     break;
                 case "*":
-                    PlayerPoints *= int.Parse(number);
+                    playerPoints *= int.Parse(number);
                     break;
                 case "/":
-                    PlayerPoints /= int.Parse(number);
+                    playerPoints /= int.Parse(number);
                     break;
             }
         }
@@ -63,5 +53,8 @@ namespace MathTricks.GameObjects
             this.NextColPos = col;
         }
 
+        public int GetPlayerPoints() => this.playerPoints;
+        public int GetPlayerRows() => this.NextRowPos;
+        public int GetPlayerCols() => this.NextColPos;
     }
 }
