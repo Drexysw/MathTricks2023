@@ -1,4 +1,6 @@
-﻿namespace MathTricks.GameObjects
+﻿using System.Linq;
+
+namespace MathTricks.GameObjects
 {
     public class Player : Poll
     {
@@ -35,12 +37,12 @@
                 PlayerPoints = 0;
                 return;
             }
-            if (arithmeticOperation.Length == 1)
+            string operation = arithmeticOperation.First().ToString();
+            if (!board.ArithmeticOperations.Contains(char.Parse(operation)))
             {
                 PlayerPoints += int.Parse(arithmeticOperation);
                 return;
             }
-            string operation = arithmeticOperation.First().ToString();
             string number = arithmeticOperation.Remove(0, 1);
             switch (operation)
             {

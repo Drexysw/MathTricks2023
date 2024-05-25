@@ -1,28 +1,20 @@
-﻿using MathTricks.Enums;
-using MathTricks.GameObjects;
+﻿using MathTricks.Core.ServiceModels;
 
 namespace MathTricks.Core
 {
-    public class Engine
+    public class Engine(FirstPlayer firstPlayer, SecondPlayer secondPlayer)
     {
-        private FirstPlayer firstPlayer;
-        private SecondPlayer secondPlayer;
-        public Engine(FirstPlayer firstPlayer, SecondPlayer secondPlayer)
-        {
-            this.firstPlayer = firstPlayer;
-            this.secondPlayer = secondPlayer;
-        }
         public void Run()
         {
             int count = 0;
             string command = string.Empty;
             int[] cordinates = new int[2];
-            bool isMoving = true;
             while (true)
             {
                 bool IsFirstPlayer = count % 2 == 0;
                 Console.WriteLine(IsFirstPlayer ? "Its player1 turn" : "Its player2 turn");
                 command = Console.ReadLine();
+                bool isMoving;
                 if (IsFirstPlayer)
                 {
                     cordinates = GetNextPosition(firstPlayer.NextRowPos, firstPlayer.NextColPos, GetDirection(command));

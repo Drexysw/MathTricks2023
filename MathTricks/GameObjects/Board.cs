@@ -41,7 +41,7 @@
             }
         }
 
-        private List<char> ArithmeticOperations => ['-', '*', '/', '+'];
+        public List<char> ArithmeticOperations => ['-', '*', '/', '+'];
         public List<string> PlayersUsedArithmeticOperations { get; set; }
         private void InitializeBoard()
         {

@@ -1,4 +1,5 @@
 ﻿using MathTricks.Core;
+using MathTricks.Core.ServiceModels;
 using MathTricks.GameObjects;
 
 namespace MathTricks
