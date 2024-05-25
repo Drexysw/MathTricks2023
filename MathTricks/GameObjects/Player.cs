@@ -3,8 +3,15 @@
     public class Player(Board board) : Poll
     {
         private int playerPoints;
+        public int GetPlayerPoints() => this.playerPoints;
+        public int GetPlayerRows() => this.NextRowPos;
+        public int GetPlayerCols() => this.NextColPos;
         public  bool CanPlayerMove(int row, int col)
         {
+            if (IsPlayerSurroundedByUsedOperations())
+            {
+                return false;
+            }
             if (board.HasPlayerHitTheBoard(row, col))
             {
                 return false;
@@ -53,8 +60,60 @@
             this.NextColPos = col;
         }
 
-        public int GetPlayerPoints() => this.playerPoints;
-        public int GetPlayerRows() => this.NextRowPos;
-        public int GetPlayerCols() => this.NextColPos;
+        private bool IsPlayerSurroundedByUsedOperations()
+        {
+            var uperCordinates =  new[] { NextRowPos - 1, NextColPos };
+            var downCordinates = new[] { NextRowPos + 1, NextColPos };
+            var leftCordinates = new[] { NextRowPos, NextColPos - 1 };
+            var rightCordinates = new[] { NextRowPos, NextColPos + 1 };
+            var upLeftCordinates = new[] { NextRowPos - 1, NextColPos - 1 };
+            var upRightCordinates = new[] { NextRowPos - 1, NextColPos + 1 };
+            var downLeftCordinates = new[] { NextRowPos + 1, NextColPos - 1 };
+            var downRightCordinates = new[] { NextRowPos + 1, NextColPos + 1 };
+            if  (board.IsOnBoard(uperCordinates[0], uperCordinates[1])  &&  
+                 !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(uperCordinates[0], uperCordinates[1])))
+            {
+                return false;
+            }
+
+            if (board.IsOnBoard(downCordinates[0], downCordinates[1]) &&
+                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(downCordinates[0], downCordinates[1])))
+            {
+                return false;
+            }
+            if (board.IsOnBoard(leftCordinates[0], leftCordinates[1]) &&
+                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(leftCordinates[0], leftCordinates[1])))
+            {
+                return false;
+            }
+            if (board.IsOnBoard(rightCordinates[0], rightCordinates[1]) &&
+                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(rightCordinates[0], rightCordinates[1])))
+            {
+                return false;
+            }
+            if (board.IsOnBoard(upLeftCordinates[0], upLeftCordinates[1]) &&
+               ! board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(upLeftCordinates[0], upLeftCordinates[1])))
+            {
+                return false;
+            }
+            if (board.IsOnBoard(upRightCordinates[0], upRightCordinates[1]) &&
+                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(upRightCordinates[0], upRightCordinates[1])))
+            {
+                return false;
+            } 
+            if (board.IsOnBoard(downLeftCordinates[0], downLeftCordinates[1]) &&
+               ! board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(downLeftCordinates[0], downLeftCordinates[1])))
+            {
+                return false;
+            }
+            if (board.IsOnBoard(downRightCordinates[0], downRightCordinates[1]) &&
+                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(downRightCordinates[0], downRightCordinates[1])))
+            {
+                return false;
+            }
+            return true;
+        }
+
+       
     }
 }

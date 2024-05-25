@@ -10,8 +10,8 @@ namespace MathTricks
         {
             var board = new Board(5, 6);
             var firstPlayer = new FirstPlayer(board);
-            var SecondPlayer = new SecondPlayer(board);
-            var engine = new Engine(firstPlayer, SecondPlayer);
+            var secondPlayer = new SecondPlayer(board);
+            var engine = new Engine(firstPlayer, secondPlayer);
             engine.Run();
         }
     }
