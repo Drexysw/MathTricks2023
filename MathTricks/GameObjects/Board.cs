@@ -41,8 +41,11 @@
             }
         }
 
-        public List<char> ArithmeticOperations => ['-', '*', '/', '+'];
-        public List<string> PlayersUsedArithmeticOperations { get; set; }
+        private List<char> ArithmeticOperations => ['-', '*', '/', '+'];
+        private List<string> PlayersUsedArithmeticOperations { get; set; }
+        public void AddUsedArithmeticOperation(string operation) => PlayersUsedArithmeticOperations.Add(operation);
+        public List<char> GetArithmeticOperations() => ArithmeticOperations;
+        public List<string> GetUsedArithmeticOperations() => PlayersUsedArithmeticOperations;
         private void InitializeBoard()
         {
             this.board = new string[Rows, Cols];

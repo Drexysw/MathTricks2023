@@ -18,11 +18,11 @@
             }
             GetNextPosition(row, col);
             string boardValue = board.GetBoardValue(NextRowPos, NextColPos);
-            if (board.PlayersUsedArithmeticOperations.Contains(boardValue))
+            if (board.GetUsedArithmeticOperations().Contains(boardValue))
             {
                 return false;
             }
-            board.PlayersUsedArithmeticOperations.Add(boardValue);
+            board.AddUsedArithmeticOperation(boardValue);
             IncreasePlayerPoints(boardValue);
             return true;
         }
@@ -35,7 +35,7 @@
                 return;
             }
             string operation = arithmeticOperation.First().ToString();
-            if (!board.ArithmeticOperations.Contains(char.Parse(operation)))
+            if (!board.GetArithmeticOperations().Contains(char.Parse(operation)))
             {
                 playerPoints += int.Parse(arithmeticOperation);
                 return;
@@ -71,49 +71,47 @@
             var downLeftCordinates = new[] { NextRowPos + 1, NextColPos - 1 };
             var downRightCordinates = new[] { NextRowPos + 1, NextColPos + 1 };
             if  (board.IsOnBoard(uperCordinates[0], uperCordinates[1])  &&  
-                 !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(uperCordinates[0], uperCordinates[1])))
+                 !board.GetUsedArithmeticOperations().Contains(board.GetBoardValue(uperCordinates[0], uperCordinates[1])))
             {
                 return false;
             }
 
             if (board.IsOnBoard(downCordinates[0], downCordinates[1]) &&
-                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(downCordinates[0], downCordinates[1])))
+                !board.GetUsedArithmeticOperations().Contains(board.GetBoardValue(downCordinates[0], downCordinates[1])))
             {
                 return false;
             }
             if (board.IsOnBoard(leftCordinates[0], leftCordinates[1]) &&
-                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(leftCordinates[0], leftCordinates[1])))
+                !board.GetUsedArithmeticOperations().Contains(board.GetBoardValue(leftCordinates[0], leftCordinates[1])))
             {
                 return false;
             }
             if (board.IsOnBoard(rightCordinates[0], rightCordinates[1]) &&
-                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(rightCordinates[0], rightCordinates[1])))
+                !board.GetUsedArithmeticOperations().Contains(board.GetBoardValue(rightCordinates[0], rightCordinates[1])))
             {
                 return false;
             }
             if (board.IsOnBoard(upLeftCordinates[0], upLeftCordinates[1]) &&
-               ! board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(upLeftCordinates[0], upLeftCordinates[1])))
+               ! board.GetUsedArithmeticOperations().Contains(board.GetBoardValue(upLeftCordinates[0], upLeftCordinates[1])))
             {
                 return false;
             }
             if (board.IsOnBoard(upRightCordinates[0], upRightCordinates[1]) &&
-                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(upRightCordinates[0], upRightCordinates[1])))
+                !board.GetUsedArithmeticOperations().Contains(board.GetBoardValue(upRightCordinates[0], upRightCordinates[1])))
             {
                 return false;
             } 
             if (board.IsOnBoard(downLeftCordinates[0], downLeftCordinates[1]) &&
-               ! board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(downLeftCordinates[0], downLeftCordinates[1])))
+               ! board.GetUsedArithmeticOperations().Contains(board.GetBoardValue(downLeftCordinates[0], downLeftCordinates[1])))
             {
                 return false;
             }
             if (board.IsOnBoard(downRightCordinates[0], downRightCordinates[1]) &&
-                !board.PlayersUsedArithmeticOperations.Contains(board.GetBoardValue(downRightCordinates[0], downRightCordinates[1])))
+                !board.GetUsedArithmeticOperations().Contains(board.GetBoardValue(downRightCordinates[0], downRightCordinates[1])))
             {
                 return false;
             }
             return true;
         }
-
-       
     }
 }
