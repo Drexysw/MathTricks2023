@@ -1,6 +1,6 @@
 ﻿namespace MathTricks.GameObjects
 {
-    public class Board
+    public  class Board
     {
         private int rows;
         private int cols;
@@ -53,22 +53,27 @@
             {
                 for (int col = 0; col < Cols; col++)
                 {
-                    var operation = ArithmeticOperations[random.Next(0, 4)].ToString();
-                    string symbolOfOperation = operation == "+" ? string.Empty : operation;
-                    string randomNumber = random.Next(0, 30).ToString();
-                    if (row == 0 && col == 0 || row == Rows - 1 && col == Cols - 1)
-                    {
-                        this.board[row, col] = "0";
-                        continue;
-                    }
-                    if (randomNumber == "0" && symbolOfOperation != "/")
-                    {
-                        this.board[row, col] = $"{symbolOfOperation}{randomNumber}";
-                        continue;
-                    }
-                    this.board[row, col] = $"{symbolOfOperation}{randomNumber}";
+                    SetMatrixValue(row, col);
                 }
             }
+        }
+
+        private void SetMatrixValue(int row, int col)
+        {
+            var operation = ArithmeticOperations[random.Next(0, 4)].ToString();
+            string symbolOfOperation = operation == "+" ? string.Empty : operation;
+            string randomNumber = random.Next(0, 30).ToString();
+            if (row == 0 && col == 0 || row == Rows - 1 && col == Cols - 1)
+            {
+                this.board[row, col] = "0";
+                return;
+            }
+            if (randomNumber == "0" && symbolOfOperation == "/")
+            {
+                this.board[row, col] = $"{randomNumber}";
+                return;
+            }
+            this.board[row, col] = $"{symbolOfOperation}{randomNumber}";
         }
 
         private void PrintBoarder()

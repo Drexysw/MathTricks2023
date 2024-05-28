@@ -2,7 +2,7 @@
 
 namespace MathTricks.Core.ServiceModels
 {
-    public class FirstPlayer : Player
+    public sealed class FirstPlayer : Player
     {
         public FirstPlayer(Board board)
             : base(board)

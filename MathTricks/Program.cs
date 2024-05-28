@@ -7,12 +7,13 @@ namespace MathTricks
     class Program
     {
         static void Main(string[] args)
-        {
+        { 
             var board = new Board();
             var firstPlayer = new FirstPlayer(board);
             var secondPlayer = new SecondPlayer(board);
             var engine = new Engine(firstPlayer, secondPlayer);
             engine.Run();
+            
         }
     }
 }
